@@ -7,10 +7,17 @@ namespace SpaceShooter
 {
     class Bullet
     {
-        private Texture2D bulletTexture;
+        private static Texture2D bulletTexture;
         private Point bulletLocation;
         private int width;
         private int height;
+
+        public Bullet(Point playerLocation)
+        {
+            width = 0;
+            height = 0;
+            bulletLocation = playerLocation;
+        }
 
         public void DrawSelf(SpriteBatch spriteBatch)
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace SpaceShooter
 {
@@ -25,9 +26,14 @@ namespace SpaceShooter
 
         }
 
-        public virtual void Update()
+        public virtual void Update(KeyboardState CurKeyState)
         {
 
+        }
+
+        public virtual void FireBullet()
+        {
+            
         }
     }
 }

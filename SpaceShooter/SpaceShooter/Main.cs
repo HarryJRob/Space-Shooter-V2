@@ -4,9 +4,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SpaceShooter
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
     public class Main : Game
     {
         GraphicsDeviceManager graphics;
@@ -19,18 +16,11 @@ namespace SpaceShooter
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            //graphics.ToggleFullScreen();
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             Player1 = new PlayerShip();
             if (MPlayer) 
             {
@@ -43,50 +33,57 @@ namespace SpaceShooter
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
-
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            
-            // TODO: Add your update logic here
+            KeyboardState CurKeyState = Keyboard.GetState();
+            if (CurKeyState.IsKeyDown(Keys.Escape)) { Exit(); }
 
+            //Update Players + Respective Bullets
+            Player1.Update(CurKeyState);
+            if (Player2 != null)
+            {
+                Player2.Update(CurKeyState);
+            }
+
+
+            //Update Enemies + Respective Bullets
+
+
+
+            //Benchmarking
+            System.Text.StringBuilder StringBuild = new System.Text.StringBuilder();
+            foreach (var key in CurKeyState.GetPressedKeys())
+            {
+                StringBuild.Append("Key: ").Append(key).Append(" pressed ");
+                System.Diagnostics.Debug.WriteLine(StringBuild.ToString());
+            }
+            //System.Diagnostics.Debug.WriteLine("Width: {0}, Height: {1}", Window.ClientBounds.Width, Window.ClientBounds.Height);
             base.Update(gameTime);
+            
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            //Draw Background
             GraphicsDevice.Clear(Color.Red);
-            // TODO: Add your drawing code here
+
+            // Draw Players + Respective Bullets
+
+            Player1.DrawSelf(spriteBatch);
+            Player1.DrawBullets(spriteBatch);
+            if (Player2 != null)
+            {
+                Player2.DrawSelf(spriteBatch);
+                Player2.DrawBullets(spriteBatch);
+            }
+
+            //Draw Enemies + Respective Bullets
 
             base.Draw(gameTime);
         }
