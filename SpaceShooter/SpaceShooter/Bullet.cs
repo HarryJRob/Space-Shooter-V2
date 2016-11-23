@@ -21,8 +21,9 @@ namespace SpaceShooter
 
         public void DrawSelf(SpriteBatch spriteBatch, Texture2D bulletTexture)
         {
-            bulletLocation.X += 50;
-            spriteBatch.Draw(bulletTexture, new Rectangle(bulletLocation.X, bulletLocation.Y, width, height), Color.White);
+            //Kappa
+            bulletLocation.X += bulletSpeed;
+            spriteBatch.Draw(bulletTexture, new Rectangle(bulletLocation.X, bulletLocation.Y - height/2, width, height), Color.White);
         }
     }
 }

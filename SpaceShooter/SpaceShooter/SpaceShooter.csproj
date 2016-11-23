@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Resources\BackGround.jpg" />
+    <Content Include="Content\Resources\Bullet.png" />
+    <Content Include="Content\Resources\ship.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

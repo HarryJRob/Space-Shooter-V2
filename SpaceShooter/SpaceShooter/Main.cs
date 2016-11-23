@@ -11,6 +11,7 @@ namespace SpaceShooter
         SpriteBatch spriteBatch;
         PlayerShip Player1;
         PlayerShip Player2;
+        private Texture2D Background;
         bool MPlayer = false;
 
         public Main()
@@ -42,7 +43,7 @@ namespace SpaceShooter
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            Background = Content.Load<Texture2D>("Resources/Background");
             Player1.ShipTexture = Content.Load<Texture2D>("Resources/ship");
             Player1.BulletTexture = Content.Load<Texture2D>("Resources/Bullet");
         }
@@ -78,10 +79,10 @@ namespace SpaceShooter
         protected override void Draw(GameTime gameTime)
         {
             //Draw Background
-            GraphicsDevice.Clear(Color.Red);
+            GraphicsDevice.Clear(Color.Transparent);
             spriteBatch.Begin();
             // Draw Players + Respective Bullets
-
+            spriteBatch.Draw(Background,new Rectangle(0,0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
             Player1.DrawSelf(spriteBatch);
             Player1.DrawBullets(spriteBatch);
             if (Player2 != null)
