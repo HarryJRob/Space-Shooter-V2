@@ -37,6 +37,9 @@ namespace SpaceShooter
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            Player1.ShipTexture = Content.Load<Texture2D>("ship");
+            Player1.BulletTexture = Content.Load<Texture2D>("Bullet");
         }
 
         protected override void Update(GameTime gameTime)
@@ -57,11 +60,11 @@ namespace SpaceShooter
 
 
             //Benchmarking
-            System.Text.StringBuilder StringBuild = new System.Text.StringBuilder();
+            string KeyString = "Keys Pressed";
             foreach (var key in CurKeyState.GetPressedKeys())
             {
-                StringBuild.Append("Key: ").Append(key).Append(" pressed ");
-                System.Diagnostics.Debug.WriteLine(StringBuild.ToString());
+                KeyString = KeyString + ": " + key;
+                System.Diagnostics.Debug.WriteLine(KeyString);
             }
             //System.Diagnostics.Debug.WriteLine("Width: {0}, Height: {1}", Window.ClientBounds.Width, Window.ClientBounds.Height);
             base.Update(gameTime);
@@ -72,7 +75,7 @@ namespace SpaceShooter
         {
             //Draw Background
             GraphicsDevice.Clear(Color.Red);
-
+            spriteBatch.Begin();
             // Draw Players + Respective Bullets
 
             Player1.DrawSelf(spriteBatch);
@@ -84,8 +87,9 @@ namespace SpaceShooter
             }
 
             //Draw Enemies + Respective Bullets
-
+            
             base.Draw(gameTime);
+            spriteBatch.End();
         }
     }
 }

@@ -10,10 +10,14 @@ namespace SpaceShooter
     {
         protected Texture2D shipTexture;
         protected Point shipLocation;
+        protected Texture2D bulletTexture;
+
         protected int Height;
         protected int Width;
         protected int Health;
+        protected byte bulletCoolDown;
         protected int Score; //Used by both childs. In PlayerShip use to keep score. In EnemyShip use to determine what you gain by killing them.
+
         protected List<Bullet> BulletList = new List<Bullet> { };
 
         public virtual void DrawSelf(SpriteBatch spriteBatch)
