@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Runtime.Remoting.Channels;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -16,7 +17,10 @@ namespace SpaceShooter
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            //graphics.ToggleFullScreen();
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.ApplyChanges();
+            graphics.ToggleFullScreen();
         }
 
         protected override void Initialize()
@@ -31,6 +35,7 @@ namespace SpaceShooter
                 Player2 = null;
             }
             base.Initialize();
+            
         }
 
         protected override void LoadContent()
@@ -38,8 +43,8 @@ namespace SpaceShooter
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Player1.ShipTexture = Content.Load<Texture2D>("ship");
-            Player1.BulletTexture = Content.Load<Texture2D>("Bullet");
+            Player1.ShipTexture = Content.Load<Texture2D>("Resources/ship");
+            Player1.BulletTexture = Content.Load<Texture2D>("Resources/Bullet");
         }
 
         protected override void Update(GameTime gameTime)
@@ -53,7 +58,6 @@ namespace SpaceShooter
             {
                 Player2.Update(CurKeyState);
             }
-
 
             //Update Enemies + Respective Bullets
 

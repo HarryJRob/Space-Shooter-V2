@@ -18,7 +18,7 @@ namespace SpaceShooter
         {
             //Set all values up.
             Width = 200;
-            Height = 200;
+            Height = 100;
             
         }
 
@@ -48,7 +48,7 @@ namespace SpaceShooter
             {
                 shipLocation.X -= velocity;
             }
-            if (CurKeyState.IsKeyDown(Keys.Space) && bulletCoolDown > 50)
+            if (CurKeyState.IsKeyDown(Keys.Space) && bulletCoolDown > 40)
             {
                 bulletCoolDown = 0;
                 FireBullet();
@@ -60,6 +60,12 @@ namespace SpaceShooter
         public override void DrawSelf(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X, shipLocation.Y, Width, Height), Color.White);
+
+            //Ignore only for testing
+            spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X, shipLocation.Y, 2, 2), Color.Black);
+            spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X, shipLocation.Y + Height, 2, 2), Color.Black);
+            spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X + Width, shipLocation.Y + Height, 2, 2), Color.Black);
+            spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X + Width, shipLocation.Y, 2, 2), Color.Black);
         }
 
         public override void DrawBullets(SpriteBatch spriteBatch)
@@ -74,7 +80,7 @@ namespace SpaceShooter
         public override void FireBullet()
         {
             //System.Diagnostics.Debug.WriteLine("Bullet Fired");
-            BulletList.Add(new Bullet(new Point(shipLocation.X + Width, shipLocation.Y - Height/2)));
+            BulletList.Add(new Bullet(new Point(shipLocation.X + Width, shipLocation.Y + Height/2)));
         }
 
         //Temporary texture loading for testing
