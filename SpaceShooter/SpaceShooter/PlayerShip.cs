@@ -8,35 +8,41 @@ namespace SpaceShooter
 {
     class PlayerShip : Ship
     {
-        int velocity = 10;
-        byte PlayerID; //Set when initialised. 1 = Player1, 2 = Player2, 3 = SinglePlayer
-        const int MaxVelocity = 10;
-        const int MaxBoostVelocity = 14;
-        const int Acceleration = 2;
+        private int velocity = 10; 
+
+        private byte PlayerID; //Set when initialised. 1 = Player1, 2 = Player2, 3 = SinglePlayer
+        private const int MaxVelocity = 10;
+        private const int MaxBoostVelocity = 14;
+        private const int Acceleration = 2;
+        private int GameWindowY;
+
+        private const int BulletScale =  30;
+        private const int shipScale = 13;
         
-        public PlayerShip(byte ID, Texture2D PlayerTex, Texture2D BulletTex ,int WindowYSize) //Pass the ID,ship Texture2D/Location of on texture sheet, Starting Location,bullet Texture2D/Location on texture sheet
+        public PlayerShip(byte ID, Texture2D PlayerTex, Texture2D BulletTex, int WindowYSize) //Pass the ID,ship Texture2D/Location of on texture sheet, Window Size,bullet Texture2D/Location on texture sheet, WindowYSize
         {
             //Set all values up.
             shipTexture = PlayerTex;
             bulletTexture = BulletTex;
 
             PlayerID = ID;
-
-            bulletCoolDown = 40;
-            Width = 200;
-            Height = 100;
+            GameWindowY = WindowYSize;
+            bulletCoolDown = shipScale;
+            Height = GameWindowY / 13; //ship height will always be a 13th of the window size
+            
+            Width = Height * (int)(shipTexture.Bounds.Width / shipTexture.Bounds.Height);
 
             if (PlayerID == 1)
             {
-                shipLocation.Y = WindowYSize / 2 - Height * 2;
+                shipLocation.Y = GameWindowY / 2 - Height * 2;
             }
             else if (PlayerID == 2)
             {
-                shipLocation.Y = WindowYSize / 2 + Height * 2;
+                shipLocation.Y = GameWindowY / 2 + Height * 2;
             }
             else if (PlayerID == 3)
             {
-                shipLocation.Y = WindowYSize / 2 - Height / 2;
+                shipLocation.Y = GameWindowY / 2 - Height / 2;
             }
             shipLocation.X += 40;
         }
@@ -167,7 +173,7 @@ namespace SpaceShooter
         public override void FireBullet()
         {
             //System.Diagnostics.Debug.WriteLine("Bullet Fired");
-            BulletList.Add(new Bullet(new Point(shipLocation.X + Width, shipLocation.Y + Height/2)));
+            BulletList.Add(new Bullet(new Point(shipLocation.X + Width, shipLocation.Y + Height / 2), GameWindowY / BulletScale, (GameWindowY/BulletScale) * (int)(bulletTexture.Bounds.Height/bulletTexture.Bounds.Width)));
         }
     }
 }

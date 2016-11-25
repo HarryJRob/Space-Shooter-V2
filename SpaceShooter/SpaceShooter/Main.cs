@@ -31,6 +31,7 @@ namespace SpaceShooter
 
         protected override void Initialize()
         {
+            Window.AllowUserResizing = false;
             shipTemp = Content.Load<Texture2D>("Resources/ship");
             bulletTemp = Content.Load<Texture2D>("Resources/Bullet");
             if (MPlayer) 
@@ -40,7 +41,7 @@ namespace SpaceShooter
             }
             else 
             {
-                Player1 = new PlayerShip(3,shipTemp ,bulletTemp ,Window.ClientBounds.Height);
+                Player1 = new PlayerShip(3, shipTemp, bulletTemp, Window.ClientBounds.Height);
                 Player2 = null;
             }
             base.Initialize();
