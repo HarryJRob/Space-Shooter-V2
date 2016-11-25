@@ -11,19 +11,21 @@ namespace SpaceShooter
         int velocity = 10;
         byte PlayerID; //Set when initialised. 1 = Player1, 2 = Player2, 3 = SinglePlayer
         const int MaxVelocity = 10;
-        const int MaxBoostVelocity = 20;
+        const int MaxBoostVelocity = 14;
         const int Acceleration = 2;
         
-
         public PlayerShip(byte ID, Texture2D PlayerTex, Texture2D BulletTex ,int WindowYSize) //Pass the ID,ship Texture2D/Location of on texture sheet, Starting Location,bullet Texture2D/Location on texture sheet
         {
             //Set all values up.
             shipTexture = PlayerTex;
             bulletTexture = BulletTex;
+
             PlayerID = ID;
+
             bulletCoolDown = 40;
             Width = 200;
             Height = 100;
+
             if (PlayerID == 1)
             {
                 shipLocation.Y = WindowYSize / 2 - Height * 2;
@@ -36,6 +38,7 @@ namespace SpaceShooter
             {
                 shipLocation.Y = WindowYSize / 2 - Height / 2;
             }
+            shipLocation.X += 40;
         }
 
         public override void Update(KeyboardState CurKeyState)
@@ -141,7 +144,7 @@ namespace SpaceShooter
             //System.Diagnostics.Debug.WriteLine("ShipVelocity: {0}", velocity);
         }
 
-        public override void DrawSelf(SpriteBatch spriteBatch)
+        protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X, shipLocation.Y, Width, Height), Color.White);
 
@@ -152,7 +155,7 @@ namespace SpaceShooter
             spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X + Width, shipLocation.Y, 2, 2), Color.Black);
         }
 
-        public override void DrawBullets(SpriteBatch spriteBatch)
+        protected override void DrawBullets(SpriteBatch spriteBatch)
         {
             foreach (Bullet curBullet in BulletList)
             {

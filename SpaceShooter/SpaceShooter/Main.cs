@@ -7,10 +7,13 @@ namespace SpaceShooter
 {
     public class Main : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        PlayerShip Player1;
-        PlayerShip Player2;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+
+        private PlayerShip Player1;
+        private PlayerShip Player2;
+
+        //Need to think of a better way to do texture loading. Maybe do a texture sheet?
         private Texture2D Background;
         private Texture2D bulletTemp;
         private Texture2D shipTemp;
@@ -86,12 +89,10 @@ namespace SpaceShooter
             spriteBatch.Begin();
             // Draw Players + Respective Bullets
             spriteBatch.Draw(Background,new Rectangle(0,0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
-            Player1.DrawSelf(spriteBatch);
-            Player1.DrawBullets(spriteBatch);
+            Player1.Draw(spriteBatch);
             if (Player2 != null)
             {
-                Player2.DrawSelf(spriteBatch);
-                Player2.DrawBullets(spriteBatch);
+                Player2.Draw(spriteBatch);
             }
 
             //Draw Enemies + Respective Bullets
