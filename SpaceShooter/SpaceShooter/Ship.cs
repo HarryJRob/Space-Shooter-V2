@@ -9,7 +9,7 @@ namespace SpaceShooter
     class Ship
     {
         protected Texture2D shipTexture;
-        protected Point shipLocation;
+        protected Vector2 shipLocation;
         protected Texture2D bulletTexture;
 
         protected int Height;

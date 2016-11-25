@@ -7,12 +7,12 @@ namespace SpaceShooter
 {
     class Bullet
     {
-        private Point bulletLocation;
+        private Vector2 bulletLocation;
         private int width;
         private int height;
-        private static int bulletSpeed = 0;
+        private static int bulletSpeed = 50;
 
-        public Bullet(Point playerLocation, int Height, int Width)
+        public Bullet(Vector2 playerLocation, int Height, int Width)
         {
             width = Width;
             height = Height;
@@ -22,7 +22,7 @@ namespace SpaceShooter
         public void DrawSelf(SpriteBatch spriteBatch, Texture2D bulletTexture) //May be more efficient to do this as a static method
         {
             bulletLocation.X += bulletSpeed;
-            spriteBatch.Draw(bulletTexture, new Rectangle(bulletLocation.X, bulletLocation.Y - height/2, width, height), Color.White);
+            spriteBatch.Draw(bulletTexture, new Rectangle((int)bulletLocation.X, (int)bulletLocation.Y - height/2, width, height), Color.White);
         }
     }
 }

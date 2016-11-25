@@ -18,8 +18,10 @@ namespace SpaceShooter
 
         private const int BulletScale =  30;
         private const int shipScale = 13;
-        
-        public PlayerShip(byte ID, Texture2D PlayerTex, Texture2D BulletTex, int WindowYSize) //Pass the ID,ship Texture2D/Location of on texture sheet, Window Size,bullet Texture2D/Location on texture sheet, WindowYSize
+
+        //Pass the ID,ship Texture2D/Location of on texture sheet, Window Size,bullet Texture2D/Location on texture sheet, WindowYSize
+
+        public PlayerShip(byte ID, Texture2D PlayerTex, Texture2D BulletTex, int WindowYSize) 
         {
             //Set all values up.
             shipTexture = PlayerTex;
@@ -152,13 +154,13 @@ namespace SpaceShooter
 
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X, shipLocation.Y, Width, Height), Color.White);
+            spriteBatch.Draw(shipTexture, new Rectangle((int)shipLocation.X, (int)shipLocation.Y, Width, Height), Color.White);
 
             //Ignore only for testing
-            spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X, shipLocation.Y, 2, 2), Color.Black);
-            spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X, shipLocation.Y + Height, 2, 2), Color.Black);
-            spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X + Width, shipLocation.Y + Height, 2, 2), Color.Black);
-            spriteBatch.Draw(shipTexture, new Rectangle(shipLocation.X + Width, shipLocation.Y, 2, 2), Color.Black);
+            spriteBatch.Draw(shipTexture, new Rectangle((int)shipLocation.X, (int)shipLocation.Y, 2, 2), Color.Black);
+            spriteBatch.Draw(shipTexture, new Rectangle((int)shipLocation.X, (int)shipLocation.Y + Height, 2, 2), Color.Black);
+            spriteBatch.Draw(shipTexture, new Rectangle((int)shipLocation.X + Width, (int)shipLocation.Y + Height, 2, 2), Color.Black);
+            spriteBatch.Draw(shipTexture, new Rectangle((int)shipLocation.X + Width, (int)shipLocation.Y, 2, 2), Color.Black);
         }
 
         protected override void DrawBullets(SpriteBatch spriteBatch)
@@ -173,7 +175,8 @@ namespace SpaceShooter
         public override void FireBullet()
         {
             //System.Diagnostics.Debug.WriteLine("Bullet Fired");
-            BulletList.Add(new Bullet(new Point(shipLocation.X + Width, shipLocation.Y + Height / 2), GameWindowY / BulletScale, (GameWindowY/BulletScale) * (int)(bulletTexture.Bounds.Height/bulletTexture.Bounds.Width)));
+            BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width,shipLocation.Y + Height / 2), //Split over two lines
+                GameWindowY / BulletScale, (GameWindowY/BulletScale) * (int)(bulletTexture.Bounds.Height/bulletTexture.Bounds.Width)));
         }
     }
 }
