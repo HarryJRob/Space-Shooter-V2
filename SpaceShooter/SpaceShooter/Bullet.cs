@@ -10,18 +10,17 @@ namespace SpaceShooter
         private Point bulletLocation;
         private int width;
         private int height;
-        private const int bulletSpeed = 20;
+        private const int bulletSpeed = 50;
 
         public Bullet(Point playerLocation)
         {
-            width = 20;
-            height = 20;
+            width = 50;
+            height = 25;
             bulletLocation = playerLocation;
         }
 
         public void DrawSelf(SpriteBatch spriteBatch, Texture2D bulletTexture)
         {
-            //Kappa
             bulletLocation.X += bulletSpeed;
             spriteBatch.Draw(bulletTexture, new Rectangle(bulletLocation.X, bulletLocation.Y - height/2, width, height), Color.White);
         }
