@@ -17,7 +17,7 @@ namespace SpaceShooter
         private Texture2D Background;
         private Texture2D bulletTemp;
         private Texture2D shipTemp;
-        bool MPlayer = true;
+        bool MPlayer = false;
 
         public Main()
         {
@@ -33,15 +33,15 @@ namespace SpaceShooter
         {
             Window.AllowUserResizing = false;
             shipTemp = Content.Load<Texture2D>("Resources/Ships/ship");
-            bulletTemp = Content.Load<Texture2D>("Resources/Bullets/Bullet");
+            bulletTemp = Content.Load<Texture2D>("Resources/Bullets/BulletSheet");
             if (MPlayer) 
             {
-                Player1 = new PlayerShip(1, shipTemp, bulletTemp, Window.ClientBounds.Height);
-                Player2 = new PlayerShip(2, shipTemp, bulletTemp, Window.ClientBounds.Height);
+                Player1 = new PlayerShip(1, shipTemp, bulletTemp, Window.ClientBounds.Height, Window.ClientBounds.Width);
+                Player2 = new PlayerShip(2, shipTemp, bulletTemp, Window.ClientBounds.Height, Window.ClientBounds.Width);
             }
             else 
             {
-                Player1 = new PlayerShip(3, shipTemp, bulletTemp, Window.ClientBounds.Height);
+                Player1 = new PlayerShip(3, shipTemp, bulletTemp, Window.ClientBounds.Height, Window.ClientBounds.Width);
                 Player2 = null;
             }
             base.Initialize();
