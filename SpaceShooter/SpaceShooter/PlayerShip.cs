@@ -13,7 +13,7 @@ namespace SpaceShooter
         private byte PlayerID; //Set when initialised. 1 = Player1, 2 = Player2, 3 = SinglePlayer
         private const int MaxVelocity = 10;
         private const int MaxBoostVelocity = 20;
-        private const int Acceleration = 2;
+        private const int Acceleration = 1;
         private int GameWindowY;
         private int GameWindowX;
 
@@ -24,6 +24,8 @@ namespace SpaceShooter
 
         public PlayerShip(byte ID, Texture2D PlayerTex, Texture2D BulletTex, int WindowYSize, int WindowXSize) 
         {
+            //Speed of bullets and ships and scale of the bullets need to be made dependant on the window size!!
+
             //Set all values up.
             shipTexture = PlayerTex;
             bulletTexture = BulletTex;
@@ -53,6 +55,7 @@ namespace SpaceShooter
 
         public override void Update(KeyboardState CurKeyState)
         {
+            //Better way to do this needed
             if (PlayerID == 1)
             {
                 if (CurKeyState.IsKeyDown(Keys.LeftShift) && velocity < MaxBoostVelocity)
@@ -235,44 +238,27 @@ namespace SpaceShooter
             }
             
             bulletCoolDown++;
-
-            foreach (Bullet curBullet in BulletList)
+            if (BulletList.Count != 0)
             {
-                if (curBullet.BulletLocation.X <= GameWindowX)
+                for (int i = BulletList.Count - 1; i >= 0; i--)
                 {
-                    curBullet.Update();
-                }
-                else
-                {
-                    
+                    if (BulletList[i].BulletLocation.X > GameWindowX)
+                    {
+                        BulletList.RemoveAt(i);
+                    }
+                    else
+                    {
+                        BulletList[i].Update();
+                    }
                 }
             }
+            System.Diagnostics.Debug.WriteLine("Bullet Count: {0}", BulletList.Count);
             //System.Diagnostics.Debug.WriteLine("ShipVelocity: {0}", velocity);
-        }
-
-        protected override void DrawSelf(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(shipTexture, new Rectangle((int)shipLocation.X, (int)shipLocation.Y, Width, Height), Color.White);
-
-            //Ignore only for testing
-            //spriteBatch.Draw(shipTexture, new Rectangle((int)shipLocation.X, (int)shipLocation.Y, 2, 2), Color.Black);
-            //spriteBatch.Draw(shipTexture, new Rectangle((int)shipLocation.X, (int)shipLocation.Y + Height, 2, 2), Color.Black);
-            //spriteBatch.Draw(shipTexture, new Rectangle((int)shipLocation.X + Width, (int)shipLocation.Y + Height, 2, 2), Color.Black);
-            //spriteBatch.Draw(shipTexture, new Rectangle((int)shipLocation.X + Width, (int)shipLocation.Y, 2, 2), Color.Black);
-        }
-
-        protected override void DrawBullets(SpriteBatch spriteBatch)
-        {
-            foreach (Bullet curBullet in BulletList)
-            {
-                curBullet.DrawSelf(spriteBatch, bulletTexture);
-                //System.Diagnostics.Debug.WriteLine("Bullet Drawn. BulletNo: {0}", BulletList.Count);
-            }
         }
 
         public override void FireBullet()
         {
-            //System.Diagnostics.Debug.WriteLine("Bullet Fired");
+            //System.Diagnostics.Debug.WriteLine("Shots Fired");
             BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width,shipLocation.Y + Height / 2), //Split over two lines
                 GameWindowY / BulletScale, (GameWindowY/BulletScale) * (int)(bulletTexture.Bounds.Height/bulletTexture.Bounds.Width)));
         }

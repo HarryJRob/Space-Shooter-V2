@@ -28,12 +28,19 @@ namespace SpaceShooter
 
         protected virtual void DrawSelf(SpriteBatch spriteBatch)
         {
-
+            spriteBatch.Draw(shipTexture, new Rectangle((int)shipLocation.X, (int)shipLocation.Y, Width, Height), Color.White);
         }
 
         protected virtual void DrawBullets(SpriteBatch spriteBatch)
         {
-
+            if (BulletList.Count != 0)
+            {
+                foreach (Bullet curBullet in BulletList)
+                {
+                    curBullet.DrawSelf(spriteBatch, bulletTexture);
+                    //System.Diagnostics.Debug.WriteLine("Bullet Drawn. BulletNo: {0}", BulletList.Count);
+                }
+            }
         }
 
         public virtual void Update(KeyboardState CurKeyState)

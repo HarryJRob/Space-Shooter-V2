@@ -10,7 +10,7 @@ namespace SpaceShooter
         private Vector2 bulletLocation;
         private int width;
         private int height;
-        private static int bulletSpeed = 40;
+        private static int bulletSpeed = 35;
         private int currentFrame = 0;
         private Rectangle sourceRec;
         private static int bulletScale = 3;
@@ -21,33 +21,28 @@ namespace SpaceShooter
             height = Height;
             bulletLocation = playerLocation;
         }
-        //Update needed
 
         public void Update()
         {
             bulletLocation.X += bulletSpeed;
 
-            //Animation currently hardcoded
-            if (currentFrame < 5) 
+            ////Animation currently hardcoded
+            if (currentFrame < 5)
             {
-                sourceRec = new Rectangle(10,186,10,10);
+                sourceRec = new Rectangle(10, 186, 10, 10);
                 currentFrame += 1;
             }
 
-            else if (currentFrame < 15) 
-            {
-                sourceRec = new Rectangle(20, 186, 18, 10);
-                currentFrame += 1;
-            }
-            else if (currentFrame < 25)
-            {
-                sourceRec = new Rectangle(40, 186, 20, 10);
-                currentFrame += 1;
-            }
-            else if (currentFrame < 35)
-            {
-                sourceRec = new Rectangle(60, 186, 35, 10);
-            }
+            //else if (currentFrame < 15)
+            //{
+            //    sourceRec = new Rectangle(20, 186, 18, 10);
+            //    currentFrame += 1;
+            //}
+            //else if (currentFrame < 25)
+            //{
+            //    sourceRec = new Rectangle(40, 186, 20, 10);
+            //    currentFrame += 1;
+            //}
         }
 
         public void DrawSelf(SpriteBatch spriteBatch, Texture2D bulletTexture) //May be more efficient to do this as a static method

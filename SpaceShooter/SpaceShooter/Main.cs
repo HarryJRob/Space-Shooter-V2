@@ -13,10 +13,12 @@ namespace SpaceShooter
         private PlayerShip Player1;
         private PlayerShip Player2;
 
-        //Need to think of a better way to do texture loading. Maybe do a texture sheet?
         private Texture2D Background;
-        private Texture2D bulletTemp;
+        private Texture2D bulletTexSheet;
         private Texture2D shipTemp;
+
+        KeyboardState CurKeyState;
+
         bool MPlayer = false;
 
         public Main()
@@ -33,15 +35,15 @@ namespace SpaceShooter
         {
             Window.AllowUserResizing = false;
             shipTemp = Content.Load<Texture2D>("Resources/Ships/ship");
-            bulletTemp = Content.Load<Texture2D>("Resources/Bullets/BulletSheet");
+            bulletTexSheet = Content.Load<Texture2D>("Resources/Bullets/BulletSheet");
             if (MPlayer) 
             {
-                Player1 = new PlayerShip(1, shipTemp, bulletTemp, Window.ClientBounds.Height, Window.ClientBounds.Width);
-                Player2 = new PlayerShip(2, shipTemp, bulletTemp, Window.ClientBounds.Height, Window.ClientBounds.Width);
+                Player1 = new PlayerShip(1, shipTemp, bulletTexSheet, Window.ClientBounds.Height, Window.ClientBounds.Width);
+                Player2 = new PlayerShip(2, shipTemp, bulletTexSheet, Window.ClientBounds.Height, Window.ClientBounds.Width);
             }
             else 
             {
-                Player1 = new PlayerShip(3, shipTemp, bulletTemp, Window.ClientBounds.Height, Window.ClientBounds.Width);
+                Player1 = new PlayerShip(3, shipTemp, bulletTexSheet, Window.ClientBounds.Height, Window.ClientBounds.Width);
                 Player2 = null;
             }
             base.Initialize();
@@ -57,7 +59,7 @@ namespace SpaceShooter
 
         protected override void Update(GameTime gameTime)
         {
-            KeyboardState CurKeyState = Keyboard.GetState();
+            CurKeyState = Keyboard.GetState();
             if (CurKeyState.IsKeyDown(Keys.Escape)) { Exit(); }
 
             //Update Players + Respective Bullets
@@ -72,12 +74,12 @@ namespace SpaceShooter
 
 
             //Benchmarking
-            string KeyString = "Keys Pressed";
-            foreach (var key in CurKeyState.GetPressedKeys())
-            {
-                KeyString = KeyString + ": " + key;
-                System.Diagnostics.Debug.WriteLine(KeyString);
-            }
+            //string KeyString = "Keys Pressed";
+            //foreach (var key in CurKeyState.GetPressedKeys())
+            //{
+            //    KeyString = KeyString + ": " + key;
+            //    System.Diagnostics.Debug.WriteLine(KeyString);
+            //}
             //System.Diagnostics.Debug.WriteLine("Width: {0}, Height: {1}", Window.ClientBounds.Width, Window.ClientBounds.Height);
             base.Update(gameTime);
             
