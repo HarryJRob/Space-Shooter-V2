@@ -11,9 +11,15 @@ namespace SpaceShooter
         private int velocity = 10; 
 
         private byte PlayerID; //Set when initialised. 1 = Player1, 2 = Player2, 3 = SinglePlayer
-        private const int MaxVelocity = 10;
-        private const int MaxBoostVelocity = 20;
-        private const int Acceleration = 1;
+        private static int MaxVelocity = 10;
+        private static int MaxBoostVelocity = 20;
+        private static int Acceleration = 1;
+        private static int BulletCoolDown = 15;
+
+        private int CallCount1 = 0;
+        private int CallCount2 = 0;
+
+
         private int GameWindowY;
         private int GameWindowX;
 
@@ -33,7 +39,7 @@ namespace SpaceShooter
             PlayerID = ID;
             GameWindowY = WindowYSize;
             GameWindowX = WindowXSize;
-            bulletCoolDown = shipScale;
+            //bulletCoolDown = shipScale;
             Height = GameWindowY / shipScale; //ship height will always be a 13th of the window size
             
             Width = Height * (int)(shipTexture.Bounds.Width / shipTexture.Bounds.Height);
@@ -55,12 +61,15 @@ namespace SpaceShooter
 
         public override void Update(KeyboardState CurKeyState)
         {
+            //System.Diagnostics.Debug.WriteLine("Ship Move Check");
             //Better way to do this needed
+            CallCount1++;
             if (PlayerID == 1)
             {
                 if (CurKeyState.IsKeyDown(Keys.LeftShift) && velocity < MaxBoostVelocity)
                 {
                     velocity += Acceleration;
+
                 }
                 else if (velocity > MaxVelocity)
                 {
@@ -110,9 +119,9 @@ namespace SpaceShooter
                         shipLocation.X -= velocity;
                     }
                 }
-                if (CurKeyState.IsKeyDown(Keys.Space) && bulletCoolDown > 40)
+                if (CurKeyState.IsKeyDown(Keys.Space) && CurbulletCoolDown > BulletCoolDown)
                 {
-                    bulletCoolDown = 0;
+                    CurbulletCoolDown = 0;
                     FireBullet();
                 }
             }
@@ -170,9 +179,9 @@ namespace SpaceShooter
                         shipLocation.X -= velocity;
                     }
                 }
-                if (CurKeyState.IsKeyDown(Keys.Enter) && bulletCoolDown > 40)
+                if (CurKeyState.IsKeyDown(Keys.Enter) && CurbulletCoolDown > BulletCoolDown)
                 {
-                    bulletCoolDown = 0;
+                    CurbulletCoolDown = 0;
                     FireBullet();
                 }
             }
@@ -230,14 +239,15 @@ namespace SpaceShooter
                         shipLocation.X -= velocity;
                     }
                 }
-                if ((CurKeyState.IsKeyDown(Keys.Space) || CurKeyState.IsKeyDown(Keys.Enter)) && bulletCoolDown > 40)
+                if ((CurKeyState.IsKeyDown(Keys.Space) || CurKeyState.IsKeyDown(Keys.Enter)) && CurbulletCoolDown > BulletCoolDown)
                 {
-                    bulletCoolDown = 0;
+                    CurbulletCoolDown = 0;
                     FireBullet();
                 }
             }
             
-            bulletCoolDown++;
+            CurbulletCoolDown += 1;
+            CallCount2++;
             if (BulletList.Count != 0)
             {
                 for (int i = BulletList.Count - 1; i >= 0; i--)
@@ -249,10 +259,18 @@ namespace SpaceShooter
                     else
                     {
                         BulletList[i].Update();
+                        if (BulletList[i].BulletLocation.X < shipLocation.X + Width)
+                        {
+                            System.Diagnostics.Debug.WriteLine("{0}", Convert.ToString(BulletList[i].BulletSpeed));
+                            System.Diagnostics.Debug.WriteLine("{0}", Convert.ToString(velocity));
+                            System.Diagnostics.Debug.WriteLine("Ship: {0}", Convert.ToString(CallCount1));
+                            System.Diagnostics.Debug.WriteLine("Bullet: {0}", Convert.ToString(CallCount2));
+                        }
                     }
                 }
             }
-            System.Diagnostics.Debug.WriteLine("Bullet Count: {0}", BulletList.Count);
+            //System.Diagnostics.Debug.WriteLine("Bullet Update Check");
+            //System.Diagnostics.Debug.WriteLine("Bullet Count: {0}", BulletList.Count);
             //System.Diagnostics.Debug.WriteLine("ShipVelocity: {0}", velocity);
         }
 

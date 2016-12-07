@@ -27,11 +27,11 @@ namespace SpaceShooter
             bulletLocation.X += bulletSpeed;
 
             ////Animation currently hardcoded
-            if (currentFrame < 5)
-            {
-                sourceRec = new Rectangle(10, 186, 10, 10);
-                currentFrame += 1;
-            }
+            //if (currentFrame < 5)
+            //{
+            //    sourceRec = new Rectangle(10, 186, 10, 10);
+            //    currentFrame += 1;
+            //}
 
             //else if (currentFrame < 15)
             //{
@@ -47,12 +47,18 @@ namespace SpaceShooter
 
         public void DrawSelf(SpriteBatch spriteBatch, Texture2D bulletTexture) //May be more efficient to do this as a static method
         {
-            spriteBatch.Draw(bulletTexture, new Rectangle((int)bulletLocation.X, (int)bulletLocation.Y - (sourceRec.Height * bulletScale)/2, sourceRec.Width*bulletScale, sourceRec.Height*bulletScale),sourceRec, Color.White);
+            //spriteBatch.Draw(bulletTexture, new Rectangle((int)bulletLocation.X, (int)bulletLocation.Y - (sourceRec.Height * bulletScale)/2, sourceRec.Width*bulletScale, sourceRec.Height*bulletScale),sourceRec, Color.White);
+        spriteBatch.Draw(bulletTexture, new Rectangle((int)bulletLocation.X, (int)bulletLocation.Y, width, height), Color.White);
         }
 
         public Vector2 BulletLocation
         {
             get { return bulletLocation; }
+        }
+
+        public int BulletSpeed
+        {
+            get { return bulletSpeed; }
         }
     }
 }

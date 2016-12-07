@@ -71,8 +71,6 @@ namespace SpaceShooter
 
             //Update Enemies + Respective Bullets
 
-
-
             //Benchmarking
             //string KeyString = "Keys Pressed";
             //foreach (var key in CurKeyState.GetPressedKeys())
