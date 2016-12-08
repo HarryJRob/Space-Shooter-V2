@@ -15,7 +15,7 @@ namespace SpaceShooter
         protected int Height;
         protected int Width;
         protected int Health;
-        protected byte CurbulletCoolDown;
+        protected byte CurBulletCoolDown;
         protected int CurrentScore; //Used by both childs. In PlayerShip use to keep score. In EnemyShip use to determine what you gain by killing them.
 
         protected List<Bullet> BulletList = new List<Bullet> { };
