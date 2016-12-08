@@ -24,25 +24,9 @@ namespace SpaceShooter
 
         public void Update()
         {
+            System.Diagnostics.Debug.WriteLine("Bullet 1: {0}", bulletLocation.X);
             bulletLocation.X += bulletSpeed;
-
-            ////Animation currently hardcoded
-            //if (currentFrame < 5)
-            //{
-            //    sourceRec = new Rectangle(10, 186, 10, 10);
-            //    currentFrame += 1;
-            //}
-
-            //else if (currentFrame < 15)
-            //{
-            //    sourceRec = new Rectangle(20, 186, 18, 10);
-            //    currentFrame += 1;
-            //}
-            //else if (currentFrame < 25)
-            //{
-            //    sourceRec = new Rectangle(40, 186, 20, 10);
-            //    currentFrame += 1;
-            //}
+            System.Diagnostics.Debug.WriteLine("Bullet 2: {0}", bulletLocation.X);
         }
 
         public void DrawSelf(SpriteBatch spriteBatch, Texture2D bulletTexture) //May be more efficient to do this as a static method

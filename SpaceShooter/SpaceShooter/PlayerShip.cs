@@ -11,14 +11,10 @@ namespace SpaceShooter
         private int velocity = 10; 
 
         private byte PlayerID; //Set when initialised. 1 = Player1, 2 = Player2, 3 = SinglePlayer
-        private static int MaxVelocity = 10;
-        private static int MaxBoostVelocity = 20;
+        private static int MaxVelocity = 14;
+        private static int MaxBoostVelocity = 25;
         private static int Acceleration = 1;
         private static int BulletCoolDown = 15;
-
-        private int CallCount1 = 0;
-        private int CallCount2 = 0;
-
 
         private int GameWindowY;
         private int GameWindowX;
@@ -35,7 +31,7 @@ namespace SpaceShooter
             //Set all values up.
             shipTexture = PlayerTex;
             bulletTexture = BulletTex;
-
+            
             PlayerID = ID;
             GameWindowY = WindowYSize;
             GameWindowX = WindowXSize;
@@ -63,7 +59,6 @@ namespace SpaceShooter
         {
             //System.Diagnostics.Debug.WriteLine("Ship Move Check");
             //Better way to do this needed
-            CallCount1++;
             if (PlayerID == 1)
             {
                 if (CurKeyState.IsKeyDown(Keys.LeftShift) && velocity < MaxBoostVelocity)
@@ -77,7 +72,7 @@ namespace SpaceShooter
                 }
                 if (CurKeyState.IsKeyDown(Keys.W) && shipLocation.Y > 0)
                 {
-                    if ((shipLocation.Y -= velocity) <= 0)
+                    if ((shipLocation.Y - velocity) <= 0)
                     {
                         shipLocation.Y = 0;
                     }
@@ -88,7 +83,7 @@ namespace SpaceShooter
                 }
                 if (CurKeyState.IsKeyDown(Keys.S) && shipLocation.Y < GameWindowY - Height)
                 {
-                    if ((shipLocation.Y += velocity) >= GameWindowY - Height)
+                    if ((shipLocation.Y + velocity) >= GameWindowY - Height)
                     {
                         shipLocation.Y = GameWindowY - Height;
                     }
@@ -99,7 +94,7 @@ namespace SpaceShooter
                 }
                 if (CurKeyState.IsKeyDown(Keys.D) && shipLocation.X < GameWindowX - Width)
                 {
-                    if ((shipLocation.X += velocity) >= GameWindowX - Width)
+                    if ((shipLocation.X + velocity) >= GameWindowX - Width)
                     {
                         shipLocation.X = GameWindowX - Width;
                     }
@@ -110,7 +105,7 @@ namespace SpaceShooter
                 }
                 if (CurKeyState.IsKeyDown(Keys.A) && shipLocation.X > 0)
                 {
-                    if ((shipLocation.X -= velocity) <= 0)
+                    if ((shipLocation.X - velocity) <= 0)
                     {
                         shipLocation.X = 0;
                     }
@@ -137,7 +132,7 @@ namespace SpaceShooter
                 }
                 if (CurKeyState.IsKeyDown(Keys.Up) && shipLocation.Y > 0)
                 {
-                    if ((shipLocation.Y -= velocity) <= 0)
+                    if ((shipLocation.Y - velocity) <= 0)
                     {
                         shipLocation.Y = 0;
                     }
@@ -148,7 +143,7 @@ namespace SpaceShooter
                 }
                 if (CurKeyState.IsKeyDown(Keys.Down) && shipLocation.Y < GameWindowY - Height)
                 {
-                    if ((shipLocation.Y += velocity) >= GameWindowY - Height)
+                    if ((shipLocation.Y + velocity) >= GameWindowY - Height)
                     {
                         shipLocation.Y = GameWindowY - Height;
                     }
@@ -159,7 +154,7 @@ namespace SpaceShooter
                 }
                 if (CurKeyState.IsKeyDown(Keys.Right) && shipLocation.X < GameWindowX - Width)
                 {
-                    if ((shipLocation.X += velocity) >= GameWindowX - Width)
+                    if ((shipLocation.X + velocity) >= GameWindowX - Width)
                     {
                         shipLocation.X = GameWindowX - Width;
                     }
@@ -170,7 +165,7 @@ namespace SpaceShooter
                 }
                 if (CurKeyState.IsKeyDown(Keys.Left) && shipLocation.X > 0)
                 {
-                    if ((shipLocation.X -= velocity) <= 0)
+                    if ((shipLocation.X - velocity) <= 0)
                     {
                         shipLocation.X = 0;
                     }
@@ -197,7 +192,7 @@ namespace SpaceShooter
                 }
                 if ((CurKeyState.IsKeyDown(Keys.W) || CurKeyState.IsKeyDown(Keys.Up)) && shipLocation.Y > 0)
                 {
-                    if ((shipLocation.Y -= velocity) <= 0)
+                    if ((shipLocation.Y - velocity) <= 0)
                     {
                         shipLocation.Y = 0;
                     }
@@ -208,29 +203,31 @@ namespace SpaceShooter
                 }
                 if ((CurKeyState.IsKeyDown(Keys.S) || CurKeyState.IsKeyDown(Keys.Down)) && shipLocation.Y < GameWindowY - Height)
                 {
-                    if ((shipLocation.Y += velocity) >= GameWindowY - Height)
+                    if ((shipLocation.Y + velocity) >= GameWindowY - Height)
                     {
                         shipLocation.Y = GameWindowY - Height;
                     }
                     else 
                     {
-                    shipLocation.Y += velocity;
+                        shipLocation.Y += velocity;
                     }
                 }
                 if ((CurKeyState.IsKeyDown(Keys.D) || CurKeyState.IsKeyDown(Keys.Right)) && shipLocation.X < GameWindowX - Width)
                 {
-                    if ((shipLocation.X += velocity) >= GameWindowX - Width)
+                    if ((shipLocation.X + velocity) >= GameWindowX - Width)
                     {
                         shipLocation.X = GameWindowX - Width;
                     }
                     else
                     {
+                        System.Diagnostics.Debug.WriteLine("Ship 1: {0}", shipLocation.X + Width);
                         shipLocation.X += velocity;
+                        System.Diagnostics.Debug.WriteLine("Ship 2: {0}", shipLocation.X + Width);
                     }
                 }
                 if ((CurKeyState.IsKeyDown(Keys.A) || CurKeyState.IsKeyDown(Keys.Left)) && shipLocation.X > 0)
                 {
-                    if ((shipLocation.X -= velocity) <= 0)
+                    if ((shipLocation.X - velocity) <= 0)
                     {
                         shipLocation.X = 0;
                     }
@@ -247,7 +244,7 @@ namespace SpaceShooter
             }
             
             CurbulletCoolDown += 1;
-            CallCount2++;
+
             if (BulletList.Count != 0)
             {
                 for (int i = BulletList.Count - 1; i >= 0; i--)
@@ -263,8 +260,6 @@ namespace SpaceShooter
                         {
                             System.Diagnostics.Debug.WriteLine("{0}", Convert.ToString(BulletList[i].BulletSpeed));
                             System.Diagnostics.Debug.WriteLine("{0}", Convert.ToString(velocity));
-                            System.Diagnostics.Debug.WriteLine("Ship: {0}", Convert.ToString(CallCount1));
-                            System.Diagnostics.Debug.WriteLine("Bullet: {0}", Convert.ToString(CallCount2));
                         }
                     }
                 }
