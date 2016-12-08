@@ -10,19 +10,19 @@ namespace SpaceShooter
     {
         private byte PlayerID; //Set when initialised. 1 = Player1, 2 = Player2, 3 = SinglePlayer
 
-        private int velocity = 14;
-        private static byte MaxVelocity = 14;
+        private static byte MaxVelocity = 15;
+        private int velocity = MaxVelocity;
         private static byte MaxBoostVelocity = 25;
         private static byte Acceleration = 1;
         private static byte BulletCoolDown = 15;
 
-        private List<Keys> ControlScheme = new List<Keys> { Keys.W, Keys.A, Keys.D, Keys.S, Keys.LeftShift, Keys.Space };
+        private List<Keys> ControlScheme = new List<Keys> { Keys.W, Keys.A, Keys.D, Keys.S, Keys.LeftShift, Keys.Space }; //Currently hard coded will need to be loaded from a file
         private List<bool> MoveList = new List<bool> { false, false, false, false, false, false }; //Up, Left ,Right ,Down ,Boost, Space
 
         private int GameWindowY;
         private int GameWindowX;
 
-        private const int BulletScale =  30;
+        private const int BulletScale = 60;
         private const int shipScale = 13;
 
         //Pass the ID,ship Texture2D/Location of on texture sheet, Window Size,bullet Texture2D/Location on texture sheet, WindowYSize
@@ -34,11 +34,13 @@ namespace SpaceShooter
             shipTexture = PlayerTex;
             bulletTexture = BulletTex;
             
+
+
             PlayerID = ID;
             GameWindowY = WindowYSize;
             GameWindowX = WindowXSize;
             //bulletCoolDown = shipScale;
-            Height = GameWindowY / shipScale; //ship height will always be a 13th of the window size
+            Height = GameWindowY / shipScale; 
             
             Width = Height * (int)(shipTexture.Bounds.Width / shipTexture.Bounds.Height);
 
@@ -163,8 +165,7 @@ namespace SpaceShooter
         public override void FireBullet()
         {
             //System.Diagnostics.Debug.WriteLine("Shots Fired");
-            BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width,shipLocation.Y + Height / 2), //Split over two lines
-                GameWindowY / BulletScale, (GameWindowY/BulletScale) * (int)(bulletTexture.Bounds.Height/bulletTexture.Bounds.Width)));
+            BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width,shipLocation.Y + Height/2), GameWindowY / BulletScale, (GameWindowY/BulletScale) * (int)(bulletTexture.Bounds.Height/bulletTexture.Bounds.Width)));
         }
     }
 }

@@ -38,7 +38,6 @@ namespace SpaceShooter
                 foreach (Bullet curBullet in BulletList)
                 {
                     curBullet.DrawSelf(spriteBatch, bulletTexture);
-                    //System.Diagnostics.Debug.WriteLine("Bullet Drawn. BulletNo: {0}", BulletList.Count);
                 }
             }
         }
