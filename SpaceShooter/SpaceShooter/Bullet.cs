@@ -12,11 +12,11 @@ namespace SpaceShooter
         private int height;
         private static int bulletSpeed = 35;
 
-        public Bullet(Vector2 playerLocation, int Height, int Width)
+        public Bullet(Vector2 shipLocation, int Height, int Width)
         {
             width = Width;
             height = Height;
-            bulletLocation = playerLocation;
+            bulletLocation = shipLocation;
         }
 
         public void Update()

@@ -13,7 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Resources/BackGrounds/BackGround.jpg
+#begin GameResources/BackGrounds/BackGround.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,9 +23,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Resources/BackGrounds/BackGround.jpg
+/build:GameResources/BackGrounds/BackGround.jpg
 
-#begin Resources/Ships/ship.png
+#begin GameResources/Bullets/BulletSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,9 +35,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Resources/Ships/ship.png
+/build:GameResources/Bullets/BulletSheet.png
 
-#begin Resources/Bullets/BulletSheet.png
+#begin GameResources/Ships/ship.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -47,5 +47,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Resources/Bullets/BulletSheet.png
+/build:GameResources/Ships/ship.png
 

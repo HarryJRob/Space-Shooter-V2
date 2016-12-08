@@ -14,13 +14,13 @@ namespace SpaceShooter
         private int velocity = MaxVelocity;
         private static byte MaxBoostVelocity = 25;
         private static byte Acceleration = 1;
-        private static byte BulletCoolDown = 15;
+        private static byte BulletCoolDown = 20;
 
         private List<Keys> ControlScheme = new List<Keys> { Keys.W, Keys.A, Keys.D, Keys.S, Keys.LeftShift, Keys.Space }; //Currently hard coded will need to be loaded from a file
         private List<bool> MoveList = new List<bool> { false, false, false, false, false, false }; //Up, Left ,Right ,Down ,Boost, Space
 
-        private int GameWindowY;
-        private int GameWindowX;
+        private readonly int GameWindowY;
+        private readonly int GameWindowX;
 
         private const int BulletScale = 60;
         private const int shipScale = 13;
@@ -29,12 +29,9 @@ namespace SpaceShooter
 
         public PlayerShip(byte ID, Texture2D PlayerTex, Texture2D BulletTex, int WindowYSize, int WindowXSize) 
         {
-            //Speed of bullets and ships and scale of the bullets need to be made dependant on the window size!!
             //Set all values up.
             shipTexture = PlayerTex;
             bulletTexture = BulletTex;
-            
-
 
             PlayerID = ID;
             GameWindowY = WindowYSize;

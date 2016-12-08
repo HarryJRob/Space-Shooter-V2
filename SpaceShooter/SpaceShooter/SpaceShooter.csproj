@@ -40,7 +40,8 @@
   <ItemGroup>
     <Compile Include="Bullet.cs" />
     <Compile Include="EnemyShip.cs" />
-    <Compile Include="Main.cs" />
+    <Compile Include="MainGame.cs" />
+    <Compile Include="ProgramManager.cs" />
     <Compile Include="PlayerShip.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,20 +55,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Resources\BackGrounds\BackGround.jpg" />
-    <Content Include="Content\Resources\Bullets\Bullet.png" />
-    <Content Include="Content\Resources\Bullets\BulletSheet.png" />
-    <Content Include="Content\Resources\Ships\ship.png" />
-    <Content Include="Content\Resources\Temp\F5S1.png" />
-    <Content Include="Content\Resources\Temp\F5S2.png" />
-    <Content Include="Content\Resources\Temp\F5S3.png" />
-    <Content Include="Content\Resources\Temp\F5S4.png" />
-    <Content Include="Content\Resources\Temp\JEROM_spaceships0_CC-BY-3.png" />
-    <Content Include="Content\Resources\Temp\parallax-space-backgound.png" />
-    <Content Include="Content\Resources\Temp\parallax-space-big-planet.png" />
-    <Content Include="Content\Resources\Temp\parallax-space-far-planets.png" />
-    <Content Include="Content\Resources\Temp\parallax-space-ring-planet.png" />
-    <Content Include="Content\Resources\Temp\parallax-space-stars.png" />
+    <Content Include="Content\GameResources\BackGrounds\BackGround.jpg" />
+    <Content Include="Content\GameResources\Bullets\BulletSheet.png" />
+    <Content Include="Content\GameResources\Ships\ship.png" />
+    <Content Include="Content\GameResources\Temp\F5S1.png" />
+    <Content Include="Content\GameResources\Temp\F5S2.png" />
+    <Content Include="Content\GameResources\Temp\F5S3.png" />
+    <Content Include="Content\GameResources\Temp\F5S4.png" />
+    <Content Include="Content\GameResources\Temp\JEROM_spaceships0_CC-BY-3.png" />
+    <Content Include="Content\GameResources\Temp\parallax-space-backgound.png" />
+    <Content Include="Content\GameResources\Temp\parallax-space-big-planet.png" />
+    <Content Include="Content\GameResources\Temp\parallax-space-far-planets.png" />
+    <Content Include="Content\GameResources\Temp\parallax-space-ring-planet.png" />
+    <Content Include="Content\GameResources\Temp\parallax-space-stars.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

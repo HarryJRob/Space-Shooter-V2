@@ -14,7 +14,7 @@ namespace SpaceShooter
         [STAThread]
         static void Main()
         {
-            using (var game = new Main())
+            using (var game = new ProgramManager())
                 game.Run();
         }
     }
