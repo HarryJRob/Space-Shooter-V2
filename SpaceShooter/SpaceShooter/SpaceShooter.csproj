@@ -58,16 +58,8 @@
     <Content Include="Content\GameResources\BackGrounds\BackGround.jpg" />
     <Content Include="Content\GameResources\Bullets\BulletSheet.png" />
     <Content Include="Content\GameResources\Ships\ship.png" />
-    <Content Include="Content\GameResources\Temp\F5S1.png" />
-    <Content Include="Content\GameResources\Temp\F5S2.png" />
-    <Content Include="Content\GameResources\Temp\F5S3.png" />
-    <Content Include="Content\GameResources\Temp\F5S4.png" />
+    <Content Include="Content\GameResources\Ships\SpaceShip.png" />
     <Content Include="Content\GameResources\Temp\JEROM_spaceships0_CC-BY-3.png" />
-    <Content Include="Content\GameResources\Temp\parallax-space-backgound.png" />
-    <Content Include="Content\GameResources\Temp\parallax-space-big-planet.png" />
-    <Content Include="Content\GameResources\Temp\parallax-space-far-planets.png" />
-    <Content Include="Content\GameResources\Temp\parallax-space-ring-planet.png" />
-    <Content Include="Content\GameResources\Temp\parallax-space-stars.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

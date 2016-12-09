@@ -1,13 +1,12 @@
-﻿using System.Runtime.Remoting.Channels;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace SpaceShooter
 {
+    
     public class ProgramManager : Game
     {
-
         private enum GameState
         {
             MainMenu,
@@ -81,12 +80,14 @@ namespace SpaceShooter
         private void ChangeState(GameState changeGameState)
         {
             GameStateManager = changeGameState;
+
             if (GameStateManager == GameState.Playing)
             {
                 CurGame = new MainGame();
                 CurGame.LoadTextures(Content);
                 CurGame.Initialise(MPlayer, Window);
             }
+
         }
     }
 }
