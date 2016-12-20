@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 namespace SpaceShooter
 {
     
-    public class ProgramManager : Game
+    public class GameManager : Game
     {
         private enum GameState
         {
@@ -26,15 +26,15 @@ namespace SpaceShooter
 
         private bool MPlayer = false;
 
-        public ProgramManager()
+        public GameManager()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            graphics.ApplyChanges();
-            graphics.ToggleFullScreen();
-            Window.AllowUserResizing = false;
+            //graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            //graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            //graphics.ApplyChanges();
+            //graphics.ToggleFullScreen();
+            //Window.AllowUserResizing = false;
         }
 
         protected override void Initialize()

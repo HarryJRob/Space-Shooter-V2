@@ -41,11 +41,6 @@ namespace SpaceShooter
             }
         }
 
-        public virtual void Update(KeyboardState CurKeyState)
-        {
-
-        }
-
         public virtual void FireBullet()
         {
             

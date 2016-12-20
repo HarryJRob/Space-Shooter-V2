@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,9 +9,9 @@ namespace SpaceShooter
     {
         private byte PlayerID; //Set when initialised. 1 = Player1, 2 = Player2, 3 = SinglePlayer
 
-        private static byte MaxVelocity = 15;
+        private static byte MaxVelocity = 10;
         private int velocity = MaxVelocity;
-        private static byte MaxBoostVelocity = 25;
+        private static byte MaxBoostVelocity = 15;
         private static byte Acceleration = 1;
         private static byte BulletCoolDown = 20;
 
@@ -56,7 +55,7 @@ namespace SpaceShooter
             shipLocation.X += 40;
         }
 
-        public override void Update(KeyboardState CurKeyState)
+        public void Update(KeyboardState CurKeyState)
         {
 
             for (int i = 0; i < ControlScheme.Count; i++)
