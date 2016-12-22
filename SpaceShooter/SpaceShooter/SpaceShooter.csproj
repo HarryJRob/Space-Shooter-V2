@@ -41,6 +41,7 @@
     <Compile Include="Bullet.cs" />
     <Compile Include="EnemyShip.cs" />
     <Compile Include="MainGame.cs" />
+    <Compile Include="MainMenu.cs" />
     <Compile Include="ProgramManager.cs" />
     <Compile Include="PlayerShip.cs" />
     <Compile Include="Program.cs" />

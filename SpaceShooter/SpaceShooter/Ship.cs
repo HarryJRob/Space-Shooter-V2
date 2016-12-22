@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace SpaceShooter
 {
@@ -11,6 +10,7 @@ namespace SpaceShooter
         protected Vector2 shipLocation;
         protected Texture2D bulletTexture;
 
+        protected float movementAngle= 90;
         protected int Height;
         protected int Width;
         protected int Health;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,9 +10,9 @@ namespace SpaceShooter
     {
         private byte PlayerID; //Set when initialised. 1 = Player1, 2 = Player2, 3 = SinglePlayer
 
-        private static byte MaxVelocity = 10;
+        private static byte MaxVelocity = 8;
         private int velocity = MaxVelocity;
-        private static byte MaxBoostVelocity = 15;
+        private static byte MaxBoostVelocity = 8;
         private static byte Acceleration = 1;
         private static byte BulletCoolDown = 20;
 
@@ -38,7 +39,7 @@ namespace SpaceShooter
             //bulletCoolDown = shipScale;
             Height = GameWindowY / shipScale; 
             
-            Width = Height * (int)(shipTexture.Bounds.Width / shipTexture.Bounds.Height);
+            Width = Height * (shipTexture.Bounds.Width / shipTexture.Bounds.Height);
 
             if (PlayerID == 1)
             {
