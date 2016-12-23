@@ -8,10 +8,13 @@ namespace SpaceShooter
         private Vector2 bulletLocation;
         private int width;
         private int height;
-        private static int bulletSpeed = 35;
+        private int _bulletSpeedX;
+        private int _bulletSpeedY;
 
-        public Bullet(Vector2 shipLocation, int Height, int Width)
+        public Bullet(Vector2 shipLocation, int Height, int Width, int bulletSpeedX, int bulletSpeedY)
         {
+            _bulletSpeedX = bulletSpeedX;
+            _bulletSpeedY = bulletSpeedY;
             width = Width;
             height = Height;
             bulletLocation = shipLocation;
@@ -19,7 +22,8 @@ namespace SpaceShooter
 
         public void Update()
         {
-            bulletLocation.X += bulletSpeed;
+            bulletLocation.X += _bulletSpeedX;
+            bulletLocation.Y += _bulletSpeedY;
         }
 
         public void DrawSelf(SpriteBatch spriteBatch, Texture2D bulletTexture)
@@ -30,6 +34,16 @@ namespace SpaceShooter
         public Vector2 BulletLocation
         {
             get { return bulletLocation; }
+        }
+
+        public int BulletSpeedX
+        {
+            set { _bulletSpeedX = value; }
+        }
+
+        public int BulletSpeedY
+        {
+            set { _bulletSpeedX = value; }
         }
     }
 }

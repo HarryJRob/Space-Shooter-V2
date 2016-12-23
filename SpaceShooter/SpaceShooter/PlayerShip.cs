@@ -12,18 +12,10 @@ namespace SpaceShooter
 
         private static byte MaxVelocity = 8;
         private int velocity = MaxVelocity;
-        private static byte MaxBoostVelocity = 8;
-        private static byte Acceleration = 1;
         private static byte BulletCoolDown = 20;
 
-        private List<Keys> ControlScheme = new List<Keys> { Keys.W, Keys.A, Keys.D, Keys.S, Keys.LeftShift, Keys.Space }; //Currently hard coded will need to be loaded from a file
-        private List<bool> MoveList = new List<bool> { false, false, false, false, false, false }; //Up, Left ,Right ,Down ,Boost, Space
-
-        private readonly int GameWindowY;
-        private readonly int GameWindowX;
-
-        private const int BulletScale = 60;
-        private const int shipScale = 13;
+        private List<Keys> ControlScheme = new List<Keys> { Keys.W, Keys.A, Keys.D, Keys.S, Keys.Space }; //Currently hard coded will need to be loaded from a file
+        private List<bool> MoveList = new List<bool> { false, false, false, false, false }; //Up, Left ,Right ,Down ,Boost, Space
 
         //Pass the ID,ship Texture2D/Location of on texture sheet, Window Size,bullet Texture2D/Location on texture sheet, WindowYSize
 
@@ -77,15 +69,6 @@ namespace SpaceShooter
 
         public void PlayerMoveCheck()
         {
-            //Up, Left ,Right ,Down ,Boost
-            if (MoveList[4] && velocity < MaxBoostVelocity)
-            {
-                velocity += Acceleration;
-            }
-            else if (velocity > MaxVelocity)
-            {
-                velocity -= Acceleration;
-            }
             if (MoveList[0])
             {
                 if ((shipLocation.Y - velocity) <= 0)
@@ -130,7 +113,7 @@ namespace SpaceShooter
                     shipLocation.Y += velocity;
                 }
             }
-            if (MoveList[5] && CurBulletCoolDown >= BulletCoolDown)
+            if (MoveList[4] && CurBulletCoolDown >= BulletCoolDown)
             {
                 FireBullet();
                 CurBulletCoolDown = 0;
@@ -162,7 +145,12 @@ namespace SpaceShooter
         public override void FireBullet()
         {
             //System.Diagnostics.Debug.WriteLine("Shots Fired");
-            BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width,shipLocation.Y + Height/2), GameWindowY / BulletScale, (GameWindowY/BulletScale) * (int)(bulletTexture.Bounds.Height/bulletTexture.Bounds.Width)));
+            BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width, shipLocation.Y + Height / 2), GameWindowY / BulletScale, (GameWindowY / BulletScale) * (int)(bulletTexture.Bounds.Height / bulletTexture.Bounds.Width), 35, 0));
+        }
+
+        public Vector2 PlayerPosition
+        {
+            get { return shipLocation;}
         }
     }
 }

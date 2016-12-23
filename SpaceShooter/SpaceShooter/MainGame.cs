@@ -10,6 +10,8 @@ namespace SpaceShooter
         private PlayerShip Player1;
         private PlayerShip Player2;
 
+        private EnemyShip EnemyShip1;
+
         private Texture2D Background;
         private Texture2D bulletTexSheet;
         private Texture2D shipTex;
@@ -30,6 +32,7 @@ namespace SpaceShooter
                 Player1 = new PlayerShip(3, shipTex, bulletTexSheet, Window.ClientBounds.Height, Window.ClientBounds.Width);
                 Player2 = null;
             }
+            EnemyShip1 = new EnemyShip(shipTex,bulletTexSheet , Window.ClientBounds.Height, Window.ClientBounds.Width);
         }
 
         public void LoadTextures(Microsoft.Xna.Framework.Content.ContentManager Content)
@@ -47,6 +50,7 @@ namespace SpaceShooter
             {
                 Player2.Update(CurKeyState);
             }
+            EnemyShip1.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -58,6 +62,12 @@ namespace SpaceShooter
             {
                 Player2.Draw(spriteBatch);
             }
+            EnemyShip1.Draw(spriteBatch);
+        }
+
+        public int GetThing()
+        {
+            return 1;
         }
     }
 }
