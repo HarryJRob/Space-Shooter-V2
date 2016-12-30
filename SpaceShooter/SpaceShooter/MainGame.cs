@@ -18,6 +18,8 @@ namespace SpaceShooter
 
         private GameWindow Window;
 
+        private ShipManager shipManager;
+
         public void Initialise(bool MultiplePlayer, GameWindow window)
         {
             Window = window;
@@ -65,9 +67,5 @@ namespace SpaceShooter
             EnemyShip1.Draw(spriteBatch);
         }
 
-        public int GetThing()
-        {
-            return 1;
-        }
     }
 }
