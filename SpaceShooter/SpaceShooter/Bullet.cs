@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceShooter
 {
+
     class Bullet
     {
         private Vector2 bulletLocation;
@@ -43,7 +44,7 @@ namespace SpaceShooter
 
         public int BulletSpeedY
         {
-            set { _bulletSpeedX = value; }
+            set { _bulletSpeedY = value; }
         }
     }
 }

@@ -24,7 +24,8 @@ namespace SpaceShooter
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            
+            spriteBatch.Draw(_buttonTexture,new Rectangle((int)_buttonPosition.X,(int)_buttonPosition.Y,_buttonWidth,_buttonHeight), Color.White);
+            //WriteText
         }
 
         public bool CheckClick(MouseState mouseState)

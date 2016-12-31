@@ -4,18 +4,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SpaceShooter
 {
-    
     public class GameManager : Game
     {
-        private enum GameState
-        {
-            MainMenu,
-            OptionsMenu,
-            LevelSelect,
-            Playing
-        }
-
-        private GameState GameStateManager;
 
         private MainGame CurGame;
 
@@ -30,17 +20,17 @@ namespace SpaceShooter
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            //graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            //graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            //graphics.ApplyChanges();
-            //graphics.ToggleFullScreen();
-            //Window.AllowUserResizing = false;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.ApplyChanges();
+            graphics.ToggleFullScreen();
+            Window.AllowUserResizing = false;
         }
 
         protected override void Initialize()
         {
             //Temp
-            ChangeState(GameState.Playing);
+            ChangeState(Globals.GameState.Playing);
             base.Initialize();    
         }
 
@@ -54,7 +44,7 @@ namespace SpaceShooter
             CurKeyState = Keyboard.GetState();
             if (CurKeyState.IsKeyDown(Keys.Escape)) { Exit(); }
 
-            if (GameStateManager == GameState.Playing)
+            if (Globals.GameStateManager == Globals.GameState.Playing)
             {
                 CurGame.Update(CurKeyState);
             }
@@ -68,7 +58,7 @@ namespace SpaceShooter
             GraphicsDevice.Clear(Color.Transparent);
             spriteBatch.Begin();
 
-            if (GameStateManager == GameState.Playing)
+            if (Globals.GameStateManager == Globals.GameState.Playing)
             {
                 CurGame.Draw(spriteBatch);
             }
@@ -77,11 +67,11 @@ namespace SpaceShooter
             spriteBatch.End();
         }
 
-        private void ChangeState(GameState changeGameState)
+        private void ChangeState(Globals.GameState changeGameState)
         {
-            GameStateManager = changeGameState;
+            Globals.GameStateManager = changeGameState;
 
-            if (GameStateManager == GameState.Playing)
+            if (Globals.GameStateManager == Globals.GameState.Playing)
             {
                 CurGame = new MainGame();
                 CurGame.LoadTextures(Content);

@@ -9,28 +9,31 @@ namespace SpaceShooter
     {
         private const int chargeTime = 20;
         private int CurCharge = 0;
-
-        //Needs to be put into parent
+        private int BulYVel;
+        private int BulXVel;
 
         public EnemyShip(Texture2D EnemyTex, Texture2D BulletTex, int WindowYSize, int WindowXSize)
         {
 
             shipTexture = EnemyTex;
             bulletTexture = BulletTex;
-            shipLocation = new Vector2(200f,200f);
+            shipLocation = new Vector2(WindowXSize/2,WindowYSize/2);
             GameWindowY = WindowYSize;
             GameWindowX = WindowXSize;
 
             Height = GameWindowY / shipScale;
-
             Width = Height * (shipTexture.Bounds.Width / shipTexture.Bounds.Height);
+
+            BulYVel = WindowXSize/(15*BulletScale);
+            BulXVel = (WindowYSize/(BulletScale));
         }
 
         public void Update()
         {
             if ((CurCharge >= chargeTime) && BulletList.Count < 4)
             {
-                BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width, shipLocation.Y + Height / 2), GameWindowY / BulletScale, (GameWindowY / BulletScale) * (bulletTexture.Bounds.Height / bulletTexture.Bounds.Width), 0, 0));
+                BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width, shipLocation.Y + Height / 2), GameWindowY / BulletScale, (GameWindowY / BulletScale) * (bulletTexture.Bounds.Height / bulletTexture.Bounds.Width), 0, BulYVel));
+                BulYVel = BulYVel*-1;
                 CurCharge = 0;
             }
             else if (BulletList.Count >= 4)
@@ -59,7 +62,8 @@ namespace SpaceShooter
         {
             foreach (Bullet CurBullet in BulletList)
             {
-                CurBullet.BulletSpeedX = 20;
+                CurBullet.BulletSpeedY = 0;
+                CurBullet.BulletSpeedX = BulXVel;
             }
         }
     }
