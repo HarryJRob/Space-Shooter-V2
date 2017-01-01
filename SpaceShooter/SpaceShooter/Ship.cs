@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace SpaceShooter
 {
@@ -46,12 +47,28 @@ namespace SpaceShooter
             }
         }
 
+
         public virtual void FireBullet() { }
+
+        public virtual void FireBullet(Vector2 playerPosition) { }
+
+
+        public virtual void Update() { }
+
+        public virtual void Update(KeyboardState curKeyState) { }
+
+        public virtual void Update(Vector2 playerPosition) { }
+
 
         public int Score
         {
             get { return CurrentScore; }
             set { CurrentScore += value; }
+        }
+
+        public Vector2 shipPosition
+        {
+            get { return new Vector2(shipLocation.X - Width / 2, shipLocation.Y - Height / 2); }
         }
     }
 }

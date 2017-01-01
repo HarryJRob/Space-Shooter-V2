@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceShooter
 {
-    class EnemyShip : Ship
+    class ChargerShip : Ship
     {
         private const int chargeTime = 20;
         private int CurCharge = 0;
         private int BulYVel;
         private int BulXVel;
 
-        public EnemyShip(Texture2D EnemyTex, Texture2D BulletTex, int WindowYSize, int WindowXSize)
+        public ChargerShip(Texture2D EnemyTex, Texture2D BulletTex, int WindowYSize, int WindowXSize)
         {
 
             shipTexture = EnemyTex;
@@ -24,11 +22,11 @@ namespace SpaceShooter
             Height = GameWindowY / shipScale;
             Width = Height * (shipTexture.Bounds.Width / shipTexture.Bounds.Height);
 
-            BulYVel = WindowXSize/(15*BulletScale);
-            BulXVel = (WindowYSize/(BulletScale));
+            BulXVel = 1;
+            BulYVel = 1;
         }
 
-        public void Update()
+        public override void Update(Vector2 playerPosition)
         {
             if ((CurCharge >= chargeTime) && BulletList.Count < 4)
             {
@@ -38,7 +36,7 @@ namespace SpaceShooter
             }
             else if (BulletList.Count >= 4)
             {
-                FireBullet();
+                FireBullet(playerPosition);
             }
             CurCharge++;
 
@@ -58,12 +56,16 @@ namespace SpaceShooter
             }
         }
 
-        public override void FireBullet()
+        public override void FireBullet(Vector2 playerPosition)
         {
             foreach (Bullet CurBullet in BulletList)
             {
-                CurBullet.BulletSpeedY = 0;
-                CurBullet.BulletSpeedX = BulXVel;
+                float deltaX = playerPosition.X - shipLocation.X;
+                float deltaY = playerPosition.Y - shipLocation.Y;
+                int movementRatio = (int)(BulXVel / System.Math.Sqrt((int)deltaX ^ 2 + (int)deltaY ^ 2));
+                CurBullet.BulletSpeedX = (int)(movementRatio*deltaX);
+                CurBullet.BulletSpeedY = (int)(movementRatio*deltaY);
+
             }
         }
     }

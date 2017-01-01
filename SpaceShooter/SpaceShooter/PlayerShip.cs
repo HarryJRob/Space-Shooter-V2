@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -48,12 +47,12 @@ namespace SpaceShooter
             shipLocation.X += 40;
         }
 
-        public void Update(KeyboardState CurKeyState)
+        public override void Update(KeyboardState curKeyState)
         {
 
             for (int i = 0; i < ControlScheme.Count; i++)
             {
-                if (CurKeyState.IsKeyDown(ControlScheme[i]))
+                if (curKeyState.IsKeyDown(ControlScheme[i]))
                 {
                     MoveList[i] = true;
                 }
@@ -146,11 +145,6 @@ namespace SpaceShooter
         {
             //System.Diagnostics.Debug.WriteLine("Shots Fired");
             BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width, shipLocation.Y + Height / 2), GameWindowY / BulletScale, (GameWindowY / BulletScale) * (int)(bulletTexture.Bounds.Height / bulletTexture.Bounds.Width), 35, 0));
-        }
-
-        public Vector2 PlayerPosition
-        {
-            get { return shipLocation;}
         }
     }
 }

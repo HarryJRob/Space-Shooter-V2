@@ -39,7 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bullet.cs" />
-    <Compile Include="EnemyShip.cs" />
+    <Compile Include="ChargerShip.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="MainMenu.cs" />
