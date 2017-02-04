@@ -68,7 +68,7 @@ namespace SpaceShooter
 
         public Vector2 shipPosition
         {
-            get { return new Vector2(shipLocation.X - Width / 2, shipLocation.Y - Height / 2); }
+            get { return new Vector2(shipLocation.X + Width / 2, shipLocation.Y + Height / 2); }
         }
     }
 }

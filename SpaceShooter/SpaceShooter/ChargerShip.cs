@@ -6,9 +6,10 @@ namespace SpaceShooter
     class ChargerShip : Ship
     {
         private const int chargeTime = 20;
-        private int CurCharge = 0;
+        private int CurCharge;
         private int BulYVel;
         private int BulXVel;
+        private bool _fired = false;
 
         public ChargerShip(Texture2D EnemyTex, Texture2D BulletTex, int WindowYSize, int WindowXSize)
         {
@@ -28,15 +29,20 @@ namespace SpaceShooter
 
         public override void Update(Vector2 playerPosition)
         {
-            if ((CurCharge >= chargeTime) && BulletList.Count < 4)
+            if ((CurCharge >= chargeTime) && BulletList.Count < 4 && _fired == false)
             {
                 BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width, shipLocation.Y + Height / 2), GameWindowY / BulletScale, (GameWindowY / BulletScale) * (bulletTexture.Bounds.Height / bulletTexture.Bounds.Width), 0, BulYVel));
                 BulYVel = BulYVel*-1;
                 CurCharge = 0;
             }
-            else if (BulletList.Count >= 4)
+            else if (BulletList.Count >= 4 && _fired == false)
             {
+                _fired = true;
                 FireBullet(playerPosition);
+            }
+            else if (_fired && BulletList.Count == 0)
+            {
+                _fired = false;
             }
             CurCharge++;
 
@@ -44,13 +50,14 @@ namespace SpaceShooter
             {
                 for (int i = BulletList.Count - 1; i >= 0; i--)
                 {
-                    if (BulletList[i].BulletLocation.X > GameWindowX)
+                    if (BulletList[i].BulletLocation.X > 0 && BulletList[i].BulletLocation.X < GameWindowX && BulletList[i].BulletLocation.Y > 0 && BulletList[i].BulletLocation.Y < GameWindowY)
                     {
-                        BulletList.RemoveAt(i);
+                        
+                        BulletList[i].Update();
                     }
                     else
                     {
-                        BulletList[i].Update();
+                        BulletList.RemoveAt(i);
                     }
                 }
             }
@@ -58,14 +65,10 @@ namespace SpaceShooter
 
         public override void FireBullet(Vector2 playerPosition)
         {
-            foreach (Bullet CurBullet in BulletList)
+            foreach (Bullet curBullet in BulletList)
             {
-                float deltaX = playerPosition.X - shipLocation.X;
-                float deltaY = playerPosition.Y - shipLocation.Y;
-                int movementRatio = (int)(BulXVel / System.Math.Sqrt((int)deltaX ^ 2 + (int)deltaY ^ 2));
-                CurBullet.BulletSpeedX = (int)(movementRatio*deltaX);
-                CurBullet.BulletSpeedY = (int)(movementRatio*deltaY);
-
+                curBullet.BulletSpeedX = (int)(playerPosition.X - curBullet.BulletLocation.X)/BulletScale;
+                curBullet.BulletSpeedY = (int)(playerPosition.Y - curBullet.BulletLocation.Y)/BulletScale;
             }
         }
     }
