@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceShooter
@@ -6,10 +7,11 @@ namespace SpaceShooter
     class ChargerShip : Ship
     {
         private const int chargeTime = 20;
+        private const int FiredBulletVelocity = 20;
         private int CurCharge;
         private int BulYVel;
         private int BulXVel;
-        private bool _fired = false;
+        private bool _fired;
 
         public ChargerShip(Texture2D EnemyTex, Texture2D BulletTex, int WindowYSize, int WindowXSize)
         {
@@ -67,9 +69,18 @@ namespace SpaceShooter
         {
             foreach (Bullet curBullet in BulletList)
             {
-                curBullet.BulletSpeedX = (int)(playerPosition.X - curBullet.BulletLocation.X)/BulletScale;
-                curBullet.BulletSpeedY = (int)(playerPosition.Y - curBullet.BulletLocation.Y)/BulletScale;
+                double Angle = GetAngleTwoPoints(playerPosition, curBullet.BulletLocation);
+                curBullet.BulletSpeedX = (int)(FiredBulletVelocity*Math.Cos(Angle));
+                curBullet.BulletSpeedY = (int)(FiredBulletVelocity*Math.Sin(Angle));
             }
+        }
+
+        private double GetAngleTwoPoints(Vector2 point1, Vector2 point2)
+        {
+            double XDif = point1.X - point2.X;
+            double YDif = point1.Y - point2.Y;
+            return Math.Atan2(YDif, XDif);
+
         }
     }
 }
