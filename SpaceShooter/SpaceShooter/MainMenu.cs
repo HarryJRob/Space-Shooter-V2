@@ -1,26 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace SpaceShooter
 {
     class MainMenu
     {
-        public MainMenu()
+        private List<MenuButton> buttonList = new List<MenuButton> {};
+        private Texture2D buttonTex;
+
+        public void LoadTextures(ContentManager Content)
         {
-            //Initlilise menu objects
+            //buttonTex = Content.Load<Texture2D>("");
         }
 
-        public void Update()
+        public void Initialise()
+        {
+            
+        }
+
+        public void Update(MouseState curMouseState)
         {
             //For each menu obj check click
+            if (curMouseState.LeftButton == ButtonState.Pressed)
+            {
+                foreach (MenuButton curButton in buttonList)
+                {
+                    curButton.CheckClick(curMouseState);
+                }
+            }
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             //Draw each menu obj + background
+            foreach (MenuButton curButton in buttonList)
+            {
+                curButton.Draw(spriteBatch);
+            }
         }
     }
 }
