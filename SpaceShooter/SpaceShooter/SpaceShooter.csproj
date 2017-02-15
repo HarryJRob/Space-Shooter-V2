@@ -63,10 +63,16 @@
     <Content Include="Content\GameResources\Ships\ship.png" />
     <Content Include="Content\GameResources\Ships\SpaceShip.png" />
     <Content Include="Content\GameResources\Temp\JEROM_spaceships0_CC-BY-3.png" />
+    <Content Include="Content\GameResources\Temp\ui_big_pieces.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\GameResources\Temp\expansion_pack.zip" />
+    <None Include="Content\GameResources\Temp\explosions.zip" />
+    <None Include="Content\GameResources\Temp\ken_fonts.zip" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

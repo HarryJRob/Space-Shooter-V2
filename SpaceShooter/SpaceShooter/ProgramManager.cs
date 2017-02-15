@@ -18,8 +18,6 @@ namespace SpaceShooter
 
         private Globals.GameState LastState;
 
-        private bool MPlayer = false;
-
         public GameManager()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -33,7 +31,7 @@ namespace SpaceShooter
 
         protected override void Initialize()
         {
-            Globals.GameStateManager = Globals.GameState.Playing;
+            Globals.GameStateManager = Globals.GameState.PlayingMP;
             ChangeState(Globals.GameStateManager);
             base.Initialize();    
         }
@@ -54,7 +52,7 @@ namespace SpaceShooter
             CurMouseState = Mouse.GetState();
             if (CurKeyState.IsKeyDown(Keys.Escape)) { Exit(); }
 
-            if (Globals.GameStateManager == Globals.GameState.Playing)
+            if (Globals.GameStateManager == Globals.GameState.PlayingSP || Globals.GameStateManager == Globals.GameState.PlayingMP)
             {
                 CurGame.Update(CurKeyState);
             }
@@ -72,7 +70,7 @@ namespace SpaceShooter
             GraphicsDevice.Clear(Color.Transparent);
             spriteBatch.Begin();
 
-            if (Globals.GameStateManager == Globals.GameState.Playing)
+            if (Globals.GameStateManager == Globals.GameState.PlayingSP || Globals.GameStateManager == Globals.GameState.PlayingMP)
             {
                 CurGame.Draw(spriteBatch);
             }
@@ -89,11 +87,17 @@ namespace SpaceShooter
         {
             LastState = changeGameState;
 
-            if (Globals.GameStateManager == Globals.GameState.Playing)
+            if (Globals.GameStateManager == Globals.GameState.PlayingSP)
             {
                 CurGame = new MainGame();
                 CurGame.LoadTextures(Content);
-                CurGame.Initialise(MPlayer, Window);
+                CurGame.Initialise(false, Window);
+            }
+            else if (Globals.GameStateManager == Globals.GameState.PlayingMP)
+            {
+                CurGame = new MainGame();
+                CurGame.LoadTextures(Content);
+                CurGame.Initialise(true, Window);
             }
             else if (Globals.GameStateManager == Globals.GameState.MainMenu)
             {

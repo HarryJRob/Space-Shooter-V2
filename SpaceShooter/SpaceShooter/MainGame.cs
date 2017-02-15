@@ -53,7 +53,7 @@ namespace SpaceShooter
                     if (ShipList[1].GetType() == typeof(PlayerShip))
                     {
                         Random rnd = new Random();
-                        int i = rnd.Next(0, 1);
+                        int i = rnd.Next(0, 2);
                         CurShip.Update(ShipList[i].shipPosition);
                     }
                     else

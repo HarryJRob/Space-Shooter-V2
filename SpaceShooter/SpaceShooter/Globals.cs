@@ -7,7 +7,8 @@
             MainMenu,
             OptionsMenu,
             LevelSelect,
-            Playing
+            PlayingSP, //Playing Single Player
+            PlayingMP  //Playing Multi Player
         }
 
        public static GameState GameStateManager;
