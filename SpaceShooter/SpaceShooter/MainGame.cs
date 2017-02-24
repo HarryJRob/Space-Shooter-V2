@@ -22,14 +22,14 @@ namespace SpaceShooter
 
             if (MultiplePlayer)
             {
-                ShipList.Add(new PlayerShip(1, shipTex, bulletTexSheet, Window.ClientBounds.Height, Window.ClientBounds.Width));
-                ShipList.Add(new PlayerShip(2, shipTex, bulletTexSheet, Window.ClientBounds.Height, Window.ClientBounds.Width));
+                ShipList.Add(new PlayerShip(1, shipTex, bulletTexSheet));
+                ShipList.Add(new PlayerShip(2, shipTex, bulletTexSheet));
             }
             else
             {
-                ShipList.Add(new PlayerShip(3, shipTex, bulletTexSheet, Window.ClientBounds.Height, Window.ClientBounds.Width));
+                ShipList.Add(new PlayerShip(3, shipTex, bulletTexSheet));
             }
-            ShipList.Add(new ChargerShip(shipTex,bulletTexSheet , Window.ClientBounds.Height, Window.ClientBounds.Width));
+            ShipList.Add(new ChargerShip(shipTex,bulletTexSheet));
         }
 
         public void LoadTextures(Microsoft.Xna.Framework.Content.ContentManager Content)

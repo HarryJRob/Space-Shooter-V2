@@ -12,5 +12,7 @@
         }
 
        public static GameState GameStateManager;
+
+       public static int GameWindowY, GameWindowX;
     }
 }

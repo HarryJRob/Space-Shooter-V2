@@ -24,16 +24,21 @@ namespace SpaceShooter
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            graphics.ApplyChanges();
-            graphics.ToggleFullScreen();
             Window.AllowUserResizing = false;
+            graphics.ToggleFullScreen();
+
+            graphics.ApplyChanges();
+
+            Globals.GameWindowX = graphics.PreferredBackBufferWidth;
+            Globals.GameWindowY = graphics.PreferredBackBufferHeight;
+
         }
 
         protected override void Initialize()
         {
             Globals.GameStateManager = Globals.GameState.PlayingMP;
             ChangeState(Globals.GameStateManager);
-            base.Initialize();    
+            base.Initialize();
         }
 
         protected override void LoadContent()

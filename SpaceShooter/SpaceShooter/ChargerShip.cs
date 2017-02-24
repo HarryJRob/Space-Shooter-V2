@@ -13,16 +13,13 @@ namespace SpaceShooter
         private int BulXVel;
         private bool _fired;
 
-        public ChargerShip(Texture2D EnemyTex, Texture2D BulletTex, int WindowYSize, int WindowXSize)
+        public ChargerShip(Texture2D EnemyTex, Texture2D BulletTex)
         {
 
             shipTexture = EnemyTex;
             bulletTexture = BulletTex;
-            shipLocation = new Vector2(WindowXSize/2,WindowYSize/2);
-            GameWindowY = WindowYSize;
-            GameWindowX = WindowXSize;
-
-            Height = GameWindowY / shipScale;
+            shipLocation = new Vector2(Globals.GameWindowX/2,Globals.GameWindowY/2);
+            Height = Globals.GameWindowY / shipScale;
             Width = Height * (shipTexture.Bounds.Width / shipTexture.Bounds.Height);
 
             BulXVel = 1;
@@ -33,7 +30,7 @@ namespace SpaceShooter
         {
             if ((CurCharge >= chargeTime) && BulletList.Count < 4 && _fired == false)
             {
-                BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width, shipLocation.Y + Height / 2), GameWindowY / BulletScale, (GameWindowY / BulletScale) * (bulletTexture.Bounds.Height / bulletTexture.Bounds.Width), 0, BulYVel));
+                BulletList.Add(new Bullet(new Vector2(shipLocation.X + Width, shipLocation.Y + Height / 2), Globals.GameWindowY / BulletScale, (Globals.GameWindowY / BulletScale) * (bulletTexture.Bounds.Height / bulletTexture.Bounds.Width), 0, BulYVel));
                 BulYVel = BulYVel*-1;
                 CurCharge = 0;
             }
@@ -52,7 +49,7 @@ namespace SpaceShooter
             {
                 for (int i = BulletList.Count - 1; i >= 0; i--)
                 {
-                    if (BulletList[i].BulletLocation.X > 0 && BulletList[i].BulletLocation.X < GameWindowX && BulletList[i].BulletLocation.Y > 0 && BulletList[i].BulletLocation.Y < GameWindowY)
+                    if (BulletList[i].BulletLocation.X > 0 && BulletList[i].BulletLocation.X < Globals.GameWindowX && BulletList[i].BulletLocation.Y > 0 && BulletList[i].BulletLocation.Y < Globals.GameWindowY)
                     {
                         
                         BulletList[i].Update();

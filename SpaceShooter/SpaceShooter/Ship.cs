@@ -17,10 +17,7 @@ namespace SpaceShooter
         protected byte CurBulletCoolDown;
         protected int CurrentScore; //Used by both childs. In PlayerShip use to keep score. In EnemyShip use to determine what you gain by killing them.
 
-        protected int GameWindowY;
-        protected int GameWindowX;
-
-        protected static int BulletScale = 60;
+        protected static int BulletScale = 55;
         protected static int shipScale = 13;
 
         protected List<Bullet> BulletList = new List<Bullet> { } ;
@@ -47,11 +44,9 @@ namespace SpaceShooter
             }
         }
 
-
         public virtual void FireBullet() { }
 
         public virtual void FireBullet(Vector2 playerPosition) { }
-
 
         public virtual void Update() { }
 
